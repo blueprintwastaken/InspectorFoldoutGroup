@@ -47,8 +47,11 @@ namespace Pixeye.Unity
 			if (target != null)
 				foreach (var c in cacheFolds)
 				{
-					EditorPrefs.SetBool(string.Format($"{c.Value.atr.name}{c.Value.props[0].name}{target.GetInstanceID()}"), c.Value.expanded);
-					c.Value.Dispose();
+    					//prevent error if Foldout is empty
+    					if (c.Value.props.Count > 0) {
+						EditorPrefs.SetBool(string.Format($"{c.Value.atr.name}{c.Value.props[0].name}{target.GetInstanceID()}"), c.Value.expanded);
+						c.Value.Dispose();
+      					}
 				}
 		}
 
